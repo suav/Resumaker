@@ -45,6 +45,10 @@ sample_job_description.txt
 AGENT_INSTRUCTIONS.md
 AI_AGENT_QUICKSTART.md
 
+# Development and test files
+test_*.py
+__pycache__/
+
 # Temporary
 *.tmp
 *.bak
