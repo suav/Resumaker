@@ -39,14 +39,25 @@ pip install requests beautifulsoup4
 
 ### Running the Application
 
-#### Option 1: Standard Server (Port 8081)
+#### Quick Start
 ```bash
-python3 server.py
+# Standard server (recommended for most users)
+python run.py
+
+# Modular server (advanced users)
+python run.py --modular
+
+# Custom port
+python run.py --port 8080
 ```
 
-#### Option 2: Modular Server (Port 8083)
+#### Manual Server Start
 ```bash
-python3 server_modular.py
+# Standard server
+cd src && python server.py
+
+# Modular server  
+cd src && python server_modular.py
 ```
 
 Then open your browser to:
@@ -57,26 +68,33 @@ Then open your browser to:
 
 ```
 resumaker/
-├── backend/               # Backend API modules
-│   ├── api/              # API endpoints
-│   │   ├── linkedin.py   # LinkedIn job fetching
-│   │   ├── variants.py   # Variant management
-│   │   └── genealogy.py  # Tree generation
-│   ├── core/             # Core configuration
-│   └── services/         # Background services
-├── frontend/             # Frontend components
-│   ├── components/       # UI components
-│   │   ├── job-management/
-│   │   ├── variant-management/
-│   │   └── genealogy/
-│   ├── services/        # Frontend services
-│   └── styles/          # CSS styles
-├── scripts/             # Utility scripts
-│   └── pdf_converter.sh # PDF generation script
-└── agent_workspace/     # Working directory
-    ├── templates/       # Base resume templates
-    ├── variants/        # Generated variants
-    └── output/         # PDF outputs
+├── run.py                # Main entry point
+├── README.md            # Project documentation  
+├── LICENSE              # MIT License
+├── docs/                # Documentation
+│   └── ARCHITECTURE.md  # Detailed architecture guide
+├── examples/            # Example HTML files
+│   ├── index.html       # Basic landing page
+│   └── workshop.html    # Original workshop interface
+├── src/                 # Source code
+│   ├── backend/         # Backend API modules
+│   │   ├── api/         # API endpoints (LinkedIn, variants, etc.)
+│   │   ├── core/        # Core configuration
+│   │   ├── handlers/    # Request handlers  
+│   │   ├── services/    # Background services
+│   │   └── utils/       # Utility functions
+│   ├── frontend/        # Frontend components
+│   │   ├── components/  # UI components (job mgmt, variants, etc.)
+│   │   ├── services/    # Frontend services
+│   │   └── styles/      # CSS styles
+│   ├── scripts/         # Utility scripts
+│   ├── templates/       # Base resume templates
+│   ├── server.py        # Standard server
+│   └── server_modular.py # Modular server
+└── agent_workspace/     # Working directory (created at runtime)
+    ├── variants/        # Generated resume variants
+    ├── output/          # PDF outputs
+    └── job_descriptions/ # Saved job descriptions
 ```
 
 ## Core Features

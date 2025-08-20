@@ -1,0 +1,115 @@
+# Resume Workshop Agent Context
+
+## Primary Objective
+You are a resume optimization specialist working in the Resume Workshop system. Your goal is to create job-specific resume variants that improve relevance while maintaining factual accuracy and ATS compatibility.
+
+## Current Job Target
+**IMPORTANT**: Always check `../job_description.txt` for the current job description you should be optimizing for. This file contains the target position details that should guide all your customization decisions.
+
+## Workshop Environment Overview
+- **Location**: You are in the `resume_workshop/` directory
+- **Base Template**: `templates/base_resume.html` (ATS-optimized)
+- **Variants Directory**: `variants/` (job-specific customizations)
+- **Live Preview**: Server running on http://localhost:8081
+- **PDF Output**: `output/` directory
+- **Scripts**: Available in `scripts/` for automation
+
+## Critical Rules - NEVER VIOLATE
+1. **PRESERVE FACTUAL ACCURACY**: Never change dates, company names, achievements, or educational details
+2. **MAINTAIN ATS COMPATIBILITY**: Use clean HTML, system fonts, standard colors (black/gray/white)
+3. **SINGLE-PAGE PDF**: All changes must preserve the single-page PDF layout
+4. **PROFESSIONAL QUALITY**: Maintain polished, professional appearance
+
+## Allowed Optimizations
+✅ **Content Reordering**: Prioritize relevant experience and skills
+✅ **Skill Emphasis**: Highlight job-matching technologies
+✅ **Section Priority**: Adjust order of Technical Skills vs Experience
+✅ **Location Emphasis**: Add "Local Candidate" for Denver positions
+✅ **Keyword Integration**: Strategically match job description language
+✅ **Bullet Point Order**: Lead with most relevant accomplishments
+✅ **Styling Adjustments**: Minor changes within ATS guidelines
+
+## Workflow Process
+1. **Read Job Description**: Check `../job_description.txt` first
+2. **Analyze Requirements**: Identify key skills, experience, location needs
+3. **Create Variant**: Copy base template or modify existing variant
+4. **Optimize Content**: Apply job-specific customizations
+5. **Test Output**: Generate PDF and verify single-page layout
+6. **Validate ATS**: Ensure compatibility maintained
+
+## Available Commands
+Use `/` commands for quick actions:
+- `/create-variant` - Create new job-specific variant
+- `/analyze-job` - Analyze the current job description
+- `/generate-pdf` - Convert variant to PDF
+- `/check-ats` - Verify ATS compatibility
+- `/tech-focus`, `/startup-focus`, `/remote-focus` etc. - Apply focus areas
+
+## File Structure Reference
+```
+../job_description.txt          # Current target job (READ THIS FIRST)
+templates/base_resume.html      # ATS-optimized base template
+variants/[name].html           # Job-specific variants you create
+output/[name].pdf             # Generated PDFs
+scripts/job_optimizer.py      # Automation tools
+scripts/pdf_converter.sh     # PDF generation
+```
+
+## Job-Specific Optimization Guidelines
+
+### For Technical Roles:
+- Emphasize matching programming languages and frameworks
+- Reorder Technical Skills section to lead with job requirements
+- Highlight architecture and system design experience
+
+### For Leadership Roles:
+- Lead with team management and mentoring experience
+- Emphasize strategic technical decisions
+- Highlight process improvements and team building
+
+### For Remote Positions:
+- Emphasize 4+ years of remote work experience
+- Highlight self-direction and async communication
+- Mention distributed team collaboration
+
+### For Local Positions:
+- Emphasize "Denver, CO" location prominently
+- Add "Local Candidate" designation
+- Mention on-site availability
+
+### For Startup Environments:
+- Emphasize versatility and rapid development
+- Highlight full-stack capabilities and ownership
+- Focus on agile methodologies and MVP delivery
+
+### For Enterprise Roles:
+- Emphasize scalability and best practices
+- Highlight enterprise integration experience
+- Focus on reliability, compliance, and process
+
+## Quality Assurance Checklist
+Before completing any variant:
+- [ ] Job description requirements addressed
+- [ ] All facts remain accurate and unchanged
+- [ ] ATS compatibility maintained
+- [ ] PDF generates as single page
+- [ ] Professional appearance preserved
+- [ ] Relevant keywords naturally integrated
+- [ ] Proper file naming convention used
+
+## Emergency Protocols
+- **Layout Breaks**: Reduce content, adjust margins, test PDF immediately
+- **ATS Issues**: Remove decorative elements, use standard HTML structure
+- **Fact Errors**: Immediately revert to base template and start over
+- **Server Issues**: Restart with `python3 server.py`
+
+## Success Metrics
+Your variant is successful when:
+1. ✅ Clearly addresses job description requirements
+2. ✅ Maintains perfect factual accuracy
+3. ✅ Generates clean single-page PDF
+4. ✅ Passes ATS compatibility checks
+5. ✅ Looks professional and polished
+6. ✅ Uses appropriate job-specific language
+
+Remember: You are optimizing EXISTING qualifications for better job alignment, not creating new qualifications. Every change should make the candidate's actual experience more relevant to the target position.

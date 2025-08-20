@@ -1,0 +1,132 @@
+# Resume Workshop Commands
+
+## Server Management
+start-server = "Start the live preview server on port 8081"
+stop-server = "Stop the running preview server"
+restart-server = "Restart the preview server with fresh content"
+check-server = "Check if the server is running and accessible"
+
+## Job Description & Analysis
+read-job = "Read and analyze the current job description from ../job_description.txt"
+analyze-job = "Analyze job description for key requirements and skills"
+match-skills = "Identify which resume skills match the job description"
+update-job = "Help update the job description file with new target role"
+
+## Resume Variant Creation
+create-variant = "Create a new resume variant optimized for the current job description"
+optimize-for-job = "Create optimized resume variant based on ../job_description.txt"
+copy-base = "Copy the base template to start a new variant"
+list-variants = "Show all available resume variants with descriptions and preview links"
+name-variant = "Create a descriptive filename for a new variant based on job details"
+
+## Job-Specific Customization
+tech-focus = "Create a variant emphasizing technical skills and architecture"
+leadership-focus = "Create a variant emphasizing team leadership and management"
+startup-focus = "Create a variant optimized for startup environments"
+enterprise-focus = "Create a variant optimized for enterprise/corporate roles"
+remote-focus = "Create a variant emphasizing remote work experience"
+local-focus = "Create a variant emphasizing Denver location and local presence"
+fullstack-focus = "Create a variant highlighting full-stack development skills"
+
+## Content Optimization
+reorder-skills = "Reorder skills section to prioritize job-relevant technologies"
+emphasize-experience = "Adjust experience section to highlight relevant background"
+add-keywords = "Strategically add job-relevant keywords while maintaining accuracy"
+highlight-matches = "Emphasize resume elements that match job requirements"
+
+## PDF Generation & Output
+generate-pdf = "Convert a specific variant to PDF (specify variant name)"
+preview-pdf = "Test PDF layout for a variant without saving (single-page check)"
+fix-pdf-overflow = "Fix content overflow to ensure single-page PDF layout"
+test-all-layouts = "Check which variants have single-page vs overflow issues"
+
+## Cover Letter Creation
+create-cover-letter = "Generate a cover letter template for the current job"
+match-cover-letter = "Create cover letter that matches a resume variant"
+personalize-cover-letter = "Customize cover letter for specific company/role"
+
+## Styling & Layout
+check-ats = "Verify resume maintains ATS compatibility"
+fix-layout = "Fix any layout issues that might break PDF formatting"
+adjust-spacing = "Optimize spacing to fit content on single page"
+clean-styling = "Remove any non-ATS-friendly styling elements"
+test-responsive = "Check how resume looks across different screen sizes"
+
+## Quality Assurance
+validate-facts = "Verify all factual information remains accurate"
+check-consistency = "Ensure formatting consistency across all sections"
+test-readability = "Check resume readability and professional appearance"
+compare-variants = "Compare multiple variants side-by-side"
+ats-score = "Evaluate ATS compatibility score"
+
+## Workflow Management
+quick-iteration = "Make quick adjustments to existing variant"
+batch-process = "Process multiple job applications at once"
+reset-to-base = "Reset a variant back to the base template"
+backup-variants = "Create backup copies of all variants"
+organize-files = "Clean up and organize variant files"
+
+## Industry & Role Targeting
+healthcare-tech = "Optimize for healthcare technology roles"
+fintech-focus = "Optimize for financial technology positions"
+ai-ml-focus = "Emphasize AI/ML experience and skills"
+devops-focus = "Highlight DevOps and infrastructure experience"
+frontend-focus = "Emphasize frontend development and UI/UX skills"
+backend-focus = "Highlight backend architecture and API development"
+
+## Location-Based Customization
+denver-local = "Emphasize Denver location and local tech community"
+colorado-focus = "Highlight Colorado presence and mountain state benefits"
+remote-global = "Optimize for fully remote, global positions"
+hybrid-ready = "Emphasize flexibility for hybrid work arrangements"
+
+## Company Size Optimization
+startup-agile = "Optimize for fast-paced startup environments"
+mid-size-growth = "Target growing mid-size companies"
+enterprise-scale = "Focus on large enterprise requirements"
+consulting-contract = "Optimize for consulting or contract work"
+
+## Experience Level Targeting
+senior-level = "Emphasize senior-level responsibilities and leadership"
+tech-lead = "Focus on technical leadership and architecture decisions"
+individual-contributor = "Highlight deep technical skills and execution"
+team-builder = "Emphasize team building and mentoring experience"
+
+## Technical Specialization
+python-expert = "Highlight Python expertise and related technologies"
+javascript-focus = "Emphasize JavaScript/TypeScript and web development"
+cloud-architect = "Focus on cloud infrastructure and architecture"
+data-engineer = "Highlight data engineering and analytics experience"
+security-focus = "Emphasize security practices and compliance"
+
+## Design & Presentation
+minimal-clean = "Create a minimal, ultra-clean design"
+professional-corporate = "Standard corporate professional appearance"
+modern-tech = "Modern, tech-industry appropriate styling"
+conservative-traditional = "Traditional, conservative industry styling"
+
+## Analytics & Tracking
+variant-analytics = "Analyze performance of different variants"
+keyword-density = "Check keyword density for ATS optimization"
+section-balance = "Analyze balance between different resume sections"
+length-optimization = "Optimize content length for single-page constraint"
+
+## Troubleshooting
+fix-pdf-issues = "Troubleshoot PDF generation problems"
+debug-server = "Debug server connectivity issues"
+repair-layout = "Fix broken layout or formatting issues"
+validate-html = "Check HTML structure and validity"
+test-all-browsers = "Test compatibility across different browsers"
+
+## Application Package Creation
+complete-package = "Create complete application package (resume + cover letter + PDF)"
+multi-format = "Generate multiple formats (HTML, PDF, plain text)"
+application-bundle = "Bundle all materials for a specific job application"
+submission-ready = "Prepare final, submission-ready documents"
+
+## Help & Documentation
+show-examples = "Show examples of successful variants"
+best-practices = "Display ATS and customization best practices"
+common-mistakes = "List common mistakes to avoid"
+workflow-guide = "Show recommended workflow for new applications"
+troubleshooting-guide = "Display troubleshooting steps for common issues"

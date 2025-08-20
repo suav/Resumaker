@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrico Patarini - Resume</title>
+    <style>
+        /* Using system fonts for better ATS compatibility */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            line-height: 1.5;
+            color: #000000;
+            background: #ffffff;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 850px;
+            margin: 15px auto;
+            padding: 25px 40px;
+            background: #ffffff;
+            min-height: calc(100vh - 30px);
+            box-shadow: none;
+            border: none;
+            position: relative;
+        }
+        
+        /* Removed decorative top bar for ATS */
+        
+        @media print {
+            body {
+                padding: 0;
+                background: white;
+            }
+            .container {
+                max-width: 100%;
+                padding: 15px 25px;
+                margin: 0;
+                box-shadow: none;
+                border: none;
+            }
+            .container::before {
+                display: none;
+            }
+        }
+        
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 16px;
+            padding-bottom: 13px;
+            position: relative;
+        }
+        
+        /* Removed decorative symbol for ATS */
+        
+        h1 {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 30px;
+            font-weight: 900;
+            color: #000000;
+            margin-bottom: 5px;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+        }
+        
+        .subtitle {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 15px;
+            color: #333333;
+            font-weight: 500;
+            margin-bottom: 7px;
+            font-style: italic;
+            letter-spacing: 1.2px;
+        }
+        
+        .contact-info {
+            font-size: 12px;
+            color: #333333;
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            font-family: Georgia, 'Times New Roman', serif;
+        }
+        
+        .contact-info span {
+            white-space: nowrap;
+            position: relative;
+        }
+        
+        .contact-info span:not(:last-child)::after {
+            content: "|";
+            position: absolute;
+            right: -13px;
+            color: #000000;
+        }
+        
+        /* Section Headers */
+        h2 {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: #000000;
+            margin-top: 15px;
+            margin-bottom: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: #000000;
+        }
+        
+        /* Education Section */
+        .education-item {
+            margin-bottom: 8px;
+            font-size: 13px;
+            padding-left: 0;
+            position: relative;
+        }
+        
+        /* Removed decorative bullet for ATS */
+        
+        .degree {
+            font-weight: 700;
+            color: #000000;
+            display: inline;
+            font-family: Georgia, 'Times New Roman', serif;
+        }
+        
+        .date {
+            float: right;
+            color: #333333;
+            font-weight: 600;
+            font-style: italic;
+            font-size: 12px;
+        }
+        
+        .school {
+            color: #333333;
+            margin-top: 2px;
+            font-style: italic;
+        }
+        
+        /* Experience Section */
+        .job {
+            margin-bottom: 13px;
+            padding-left: 0;
+            position: relative;
+        }
+        
+        /* Removed decorative bullet for ATS */
+        
+        .job-header {
+            margin-bottom: 6px;
+        }
+        
+        .job-title {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-weight: 700;
+            font-size: 14px;
+            color: #000000;
+            display: inline;
+        }
+        
+        .job-date {
+            float: right;
+            color: #333333;
+            font-weight: 600;
+            font-size: 12px;
+            font-style: italic;
+        }
+        
+        .company {
+            color: #333333;
+            margin-top: 2px;
+            font-size: 13px;
+            font-style: italic;
+        }
+        
+        .job-bullets {
+            margin-top: 6px;
+            padding-left: 0;
+        }
+        
+        .job-bullets li {
+            color: #000000;
+            margin-bottom: 2.5px;
+            line-height: 1.35;
+            font-size: 12px;
+            list-style: disc;
+            position: relative;
+            padding-left: 0;
+        }
+        
+        /* Using standard bullets for ATS */
+        
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            gap: 5px;
+            padding: 10px;
+            background: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 0;
+        }
+        
+        .skill-row {
+            display: flex;
+            font-size: 11.5px;
+            line-height: 1.25;
+            padding: 3px 0;
+            border-bottom: none;
+        }
+        
+        .skill-row:last-child {
+            border-bottom: none;
+        }
+        
+        .skill-label {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-weight: 700;
+            color: #333333;
+            min-width: 130px;
+            flex-shrink: 0;
+        }
+        
+        .skill-label::after {
+            content: ":";
+            margin-left: 2px;
+        }
+        
+        .skill-content {
+            color: #000000;
+            padding-left: 10px;
+            font-size: 11.5px;
+        }
+        
+        /* Utility */
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        
+        /* Print Optimization for exactly one page */
+        @media print {
+            body {
+                font-size: 10pt;
+                font-family: Georgia, 'Times New Roman', serif;
+                background: white;
+            }
+            
+            .container {
+                padding: 0.35in 0.45in;
+                margin: 0;
+                box-shadow: none;
+                border: none;
+            }
+            
+            .container::before {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 22pt;
+            }
+            
+            .subtitle {
+                font-size: 11pt;
+            }
+            
+            h2 {
+                font-size: 11pt;
+                page-break-after: avoid;
+                margin-top: 12pt;
+                margin-bottom: 8pt;
+            }
+            
+            .header::after {
+                display: none;
+            }
+            
+            .job {
+                page-break-inside: avoid;
+                margin-bottom: 10pt;
+            }
+            
+            .education-item {
+                page-break-inside: avoid;
+                margin-bottom: 6pt;
+            }
+            
+            .skills-grid {
+                background: rgba(212, 167, 106, 0.1);
+                padding: 8pt;
+            }
+            
+            .job-bullets li {
+                font-size: 9.5pt;
+                margin-bottom: 2pt;
+            }
+            
+            .skill-content {
+                font-size: 9pt;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Enrico Patarini</h1>
+            <div class="subtitle">Lead Software Engineer</div>
+            <div class="contact-info">
+                <span>Denver, CO 80218</span>
+                <span>(860) 817-4548</span>
+                <span>Rvpatarini@gmail.com</span>
+            </div>
+        </div>
+        
+        <!-- Professional Experience -->
+        <h2>Professional Experience</h2>
+        
+        <div class="job">
+            <div class="job-header clearfix">
+                <div class="job-title">Lead Software Engineer</div>
+                <div class="job-date">January 2023 - Present</div>
+            </div>
+            <div class="company">Davin Healthcare Workforce Solutions | Remote from Denver, CO</div>
+            <ul class="job-bullets">
+                <li>Led team of 5 developers in delivering enterprise healthcare workforce solutions</li>
+                <li>Architected generalized form generation system reducing site build time by 60%+ through rapid deployment of forms, lists, and calendars</li>
+                <li>Implemented CI/CD pipeline for automated testing and deployment versioning, improving release reliability</li>
+                <li>Developed custom AI coding tools for automation, branch management, and code review optimization</li>
+                <li>Drove technical strategy and mentored team on best practices and emerging technologies</li>
+            </ul>
+        </div>
+        
+        <div class="job">
+            <div class="job-header clearfix">
+                <div class="job-title">Software Engineer</div>
+                <div class="job-date">May 2020 - December 2022</div>
+            </div>
+            <div class="company">Davin Healthcare Workforce Solutions | Remote</div>
+            <ul class="job-bullets">
+                <li>Refactored legacy codebase from 200k+ to 70k lines, improving performance and maintainability by 65%</li>
+                <li>Built core platform capabilities supporting 80%+ of all pages in internal software product</li>
+                <li>Integrated Yellowfin BI and developed JavaScript API for dynamic analytics display without code changes</li>
+                <li>Implemented REST, RPC_XML, and SOAP API integrations; built custom workflows for 12+ user types</li>
+                <li>Developed web applications using PHP, React, TypeScript, jQuery, MySQL, Java, and Python</li>
+            </ul>
+        </div>
+        
+        <!-- Technical Skills -->
+        <h2>Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-row">
+                <span class="skill-label">Core Languages</span>
+                <span class="skill-content">Python, TypeScript, JavaScript, PHP, Java, SQL, Bash</span>
+            </div>
+            <div class="skill-row">
+                <span class="skill-label">Frontend/Backend</span>
+                <span class="skill-content">React, Node.js, REST APIs, GraphQL, HTML/CSS, jQuery</span>
+            </div>
+            <div class="skill-row">
+                <span class="skill-label">AI/ML & Data</span>
+                <span class="skill-content">Machine Learning, TensorFlow, Pandas, NumPy, Data Analysis, AI Tool Development</span>
+            </div>
+            <div class="skill-row">
+                <span class="skill-label">Cloud & DevOps</span>
+                <span class="skill-content">Docker, CI/CD, Git, Linux, Digital Ocean</span>
+            </div>
+            <div class="skill-row">
+                <span class="skill-label">Databases</span>
+                <span class="skill-content">MySQL, PostgreSQL, MongoDB, Redis</span>
+            </div>
+            <div class="skill-row">
+                <span class="skill-label">Additional Exp</span>
+                <span class="skill-content">AWS, Kubernetes, n8n, Apache Airflow</span>
+            </div>
+            <div class="skill-row">
+                <span class="skill-label">Leadership</span>
+                <span class="skill-content">Team Leadership, System Architecture, Agile/Scrum, Code Review, Mentoring</span>
+            </div>
+        </div>
+        
+        <!-- Education -->
+        <h2>Education</h2>
+        <div class="education-item">
+            <div class="clearfix">
+                <span class="degree">Bachelor of Science in Computer Science</span>
+                <span class="date">May 2018</span>
+            </div>
+            <div class="school">Skidmore College, Saratoga Springs, NY</div>
+        </div>
+        <div class="education-item">
+            <div class="clearfix">
+                <span class="degree">Certificate in AI and Machine Learning</span>
+                <span class="date">November 2023</span>
+            </div>
+            <div class="school">Columbia Engineering Microbootcamp, New York, NY</div>
+        </div>
+    </div>
+</body>
+</html>
