@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.env
+.venv
+
+# Personal Data
+agent_workspace/variants/*.html
+agent_workspace/output/*.pdf
+agent_workspace/job_descriptions/*.txt
+agent_workspace/quality_feedback/*.json
+agent_workspace/templates/base_resume*.html
+variants/
+output/
+job_descriptions/
+quality_feedback/
+
+# Logs
+*.log
+server.log
+
+# Test files
+test_*.html
+test_*.py
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Personal info files
+job_description.txt
+sample_job_description.txt
+AGENT_INSTRUCTIONS.md
+AI_AGENT_QUICKSTART.md
+
+# Temporary
+*.tmp
+*.bak
+.cache/
+
+# Uploads
+uploads/
+
+# Node (if used)
+node_modules/
+package-lock.json
+
+# Background processes
+*.pid

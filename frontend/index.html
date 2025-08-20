@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Workshop - Modular UI</title>
+    
+    <!-- Core Styles -->
+    <link rel="stylesheet" href="/frontend/styles/main.css">
+    
+    <!-- Performance hints -->
+    <link rel="preload" href="/frontend/services/api-client.js" as="script">
+    <link rel="preload" href="/frontend/services/component-loader.js" as="script">
+    <link rel="preload" href="/frontend/services/state-manager.js" as="script">
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <h1>🧩 Resume Workshop</h1>
+            <p>Modular Architecture | Lazy Loaded Components</p>
+        </div>
+        <div class="header-right">
+            <span id="loading-indicator" class="loading-indicator" style="display: none;">⏳ Loading...</span>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="section">
+                <h2>Navigation</h2>
+                <button data-tab="variants" class="active">📊 Dashboard</button>
+                <button data-tab="create">⚡ Create</button>
+                <button data-tab="jobs">💼 Jobs</button>
+            </div>
+            
+            <div class="section">
+                <h2>Tools</h2>
+                <button data-tab="batch">⚙️ Batch</button>
+                <button data-tab="quality">⭐ Quality</button>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Variants Dashboard Tab -->
+            <div id="variants-tab" class="tab-content active">
+                <div class="dashboard-header">
+                    <h2>Resume Variants Dashboard</h2>
+                    <div class="view-toggles">
+                        <button id="dashboard-view-btn" class="view-toggle active" data-view="dashboard">
+                            📊 Dashboard
+                        </button>
+                        <button id="tree-view-btn" class="view-toggle" data-view="tree">
+                            🌳 Tree View
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Dashboard View -->
+                <div id="dashboard-view" class="view-content active">
+                    <div id="variants-dashboard" class="loading">
+                        Loading variants dashboard...
+                    </div>
+                </div>
+                
+                <!-- Tree View -->
+                <div id="tree-view" class="view-content">
+                    <div id="genealogy-content" class="component-placeholder">
+                        <p>🔧 Loading genealogy tree...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Create Tab -->
+            <div id="create-tab" class="tab-content">
+                <h2>Create New Variant</h2>
+                <div id="create-content" class="component-placeholder">
+                    <p>🔧 Loading create components...</p>
+                </div>
+            </div>
+
+            <!-- Jobs Tab -->
+            <div id="jobs-tab" class="tab-content">
+                <h2>Job Descriptions</h2>
+                <div id="jobs-content" class="component-placeholder">
+                    <p>🔧 Loading job management components...</p>
+                </div>
+            </div>
+
+            <!-- Batch Tab -->
+            <div id="batch-tab" class="tab-content">
+                <h2>Batch Processing</h2>
+                <div id="batch-content" class="component-placeholder">
+                    <p>🔧 Loading batch processing components...</p>
+                </div>
+            </div>
+
+            <!-- Quality Tab -->
+            <div id="quality-tab" class="tab-content">
+                <h2>Quality Analysis</h2>
+                <div id="quality-content" class="component-placeholder">
+                    <p>🔧 Loading quality analysis components...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Services - Load Immediately -->
+    <script src="/frontend/services/api-client.js"></script>
+    <script src="/frontend/services/state-manager.js"></script>
+    <script src="/frontend/services/component-loader.js"></script>
+
+    <!-- Application Initialization -->
+    <script>
+        /**
+         * Application Bootstrap
+         */
+        class WorkshopApp {
+            constructor() {
+                this.initialized = false;
+            }
+
+            async init() {
+                if (this.initialized) return;
+
+                try {
+                    console.log('🚀 Initializing Resume Workshop App...');
+                    
+                    // Show loading state
+                    this.setGlobalLoading(true);
+
+                    // Subscribe to loading state changes
+                    stateManager.subscribe('loading', (loading) => {
+                        this.setGlobalLoading(loading);
+                    });
+
+                    // Preload critical components
+                    await componentLoader.preloadCritical();
+
+                    // Load initial tab components
+                    await componentLoader.loadForTab('variants');
+
+                    // Mark as initialized
+                    this.initialized = true;
+                    
+                    console.log('✅ Workshop App initialized successfully');
+
+                } catch (error) {
+                    console.error('❌ Failed to initialize app:', error);
+                    this.showError('Failed to initialize application');
+                } finally {
+                    this.setGlobalLoading(false);
+                }
+            }
+
+            setGlobalLoading(loading) {
+                const indicator = document.getElementById('loading-indicator');
+                const mainContent = document.querySelector('.main-content');
+                
+                if (indicator) {
+                    indicator.style.display = loading ? 'inline' : 'none';
+                }
+                
+                if (mainContent) {
+                    if (loading) {
+                        mainContent.classList.add('component-loading');
+                    } else {
+                        mainContent.classList.remove('component-loading');
+                        mainContent.classList.add('component-loaded');
+                    }
+                }
+            }
+
+            showError(message) {
+                console.error(message);
+                // Could be enhanced with a proper error display system
+            }
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            window.workshopApp = new WorkshopApp();
+            workshopApp.init();
+        });
+
+        // Debug helpers
+        window.debug = {
+            state: () => stateManager.getAllState(),
+            loadedComponents: () => Array.from(componentLoader.loadedComponents),
+            reloadTab: (tab) => componentLoader.loadForTab(tab)
+        };
+
+        console.log('🧩 Modular Resume Workshop - Ready to load components');
+    </script>
+
+    <!-- Add some component-specific CSS that will be loaded conditionally -->
+    <style>
+        .component-placeholder {
+            padding: 10px;
+            text-align: center;
+            color: #666;
+            font-style: italic;
+        }
+
+        .loading-indicator {
+            color: #667eea;
+            font-size: 0.9em;
+        }
+
+        .variant-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: #f8f9fa;
+        }
+
+        .variant-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .variant-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .btn {
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85em;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+            border-color: #6c757d;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #667eea;
+            border-color: #667eea;
+        }
+
+        .btn-sm {
+            padding: 4px 8px;
+            font-size: 0.75em;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .variants-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .variants-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .variant-info p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+
+        .variant-type {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .variant-date {
+            color: #999;
+            font-size: 0.8em;
+        }
+
+        .job-info {
+            color: #28a745;
+        }
+
+        .hybrid-info {
+            color: #6f42c1;
+            font-size: 0.85em;
+        }
+
+        /* Dashboard Header and View Toggles */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .view-toggles {
+            display: flex;
+            gap: 5px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 4px;
+        }
+
+        .view-toggle {
+            padding: 8px 16px;
+            font-size: 14px;
+            border: none;
+            background: transparent;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #666;
+        }
+
+        .view-toggle:hover {
+            background: #e9ecef;
+            color: #333;
+        }
+
+        .view-toggle.active {
+            background: #667eea;
+            color: white;
+            box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+        }
+
+        /* View Content */
+        .view-content {
+            display: none;
+        }
+
+        .view-content.active {
+            display: block;
+        }
+    </style>
+</body>
+</html>

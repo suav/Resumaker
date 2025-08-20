@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Workshop - Variant Review</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            text-align: center;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .status-bar {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .status-info {
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+        
+        .variant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .variant-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .variant-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+        
+        .variant-card.selected {
+            border-color: #48bb78;
+            background: #f0fff4;
+        }
+        
+        .variant-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .variant-title {
+            font-weight: bold;
+            color: #333;
+            font-size: 1.1em;
+        }
+        
+        .variant-badge {
+            background: #667eea;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+        }
+        
+        .variant-description {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .variant-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .variant-actions a,
+        .variant-actions button {
+            flex: 1;
+            min-width: 80px;
+            text-align: center;
+            padding: 8px 12px;
+            font-size: 13px;
+        }
+        
+        .variant-actions a {
+            background: #4299e1;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+        
+        .variant-actions a:hover {
+            background: #3182ce;
+        }
+        
+        .select-btn {
+            background: #48bb78 !important;
+        }
+        
+        .select-btn:hover {
+            background: #38a169 !important;
+        }
+        
+        .current-base {
+            background: #f7fafc;
+            border: 2px solid #48bb78;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .current-base h2 {
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        
+        .base-info {
+            color: #718096;
+        }
+        
+        .instructions {
+            background: #fef5e7;
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            margin-top: 30px;
+            border-radius: 4px;
+        }
+        
+        .instructions h3 {
+            color: #d68910;
+            margin-bottom: 10px;
+        }
+        
+        .instructions ol {
+            margin-left: 20px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        #timestamp {
+            font-family: monospace;
+            color: #718096;
+        }
+        
+        /* Evolution Tree Styles */
+        .evolution-container {
+            margin-bottom: 30px;
+        }
+        
+        .base-template-section,
+        .generation-section {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border-left: 4px solid #4299e1;
+        }
+        
+        .base-template-section h3,
+        .generation-section h3 {
+            margin: 0 0 15px 0;
+            color: #2d3748;
+            font-size: 1.2em;
+        }
+        
+        .base-variants {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+        
+        .base-card {
+            background: #e6fffa;
+            border: 2px solid #38b2ac;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        
+        .base-card .variant-title {
+            color: #285e61;
+            font-weight: bold;
+        }
+        
+        .generation-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #edf2f7;
+            border-radius: 6px;
+        }
+        
+        .variant-metadata {
+            font-size: 0.85em;
+            color: #718096;
+            margin-top: 8px;
+        }
+        
+        .variant-timestamp {
+            font-family: monospace;
+            color: #4a5568;
+        }
+        
+        .parent-info {
+            background: #fed7d7;
+            padding: 8px;
+            border-radius: 4px;
+            margin-top: 8px;
+            font-size: 0.85em;
+        }
+        
+        .variant-card.recent {
+            border-color: #48bb78;
+            background: #f0fff4;
+        }
+        
+        .variant-card.recent::before {
+            content: "🌟 ";
+        }
+        
+        .lineage-indicator {
+            font-size: 0.8em;
+            color: #805ad5;
+            margin-top: 5px;
+        }
+        
+        .hybrid-indicator {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+        
+        .multi-parent-info {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 8px;
+            margin-top: 8px;
+            font-size: 0.85em;
+        }
+        
+        .parent-badge {
+            display: inline-block;
+            background: #edf2f7;
+            color: #4a5568;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.75em;
+            margin-right: 4px;
+            margin-bottom: 2px;
+        }
+        
+        .hybrid-features {
+            color: #805ad5;
+            font-style: italic;
+            margin-top: 4px;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Resume Workshop</h1>
+        <p class="subtitle">Create, preview, and select resume variants optimized for your target position</p>
+        
+        <div class="status-bar">
+            <div class="status-info">
+                <strong>Server Status:</strong> <span id="server-status">Checking...</span> | 
+                <strong>Last Updated:</strong> <span id="timestamp">-</span>
+            </div>
+            <div class="actions">
+                <button onclick="refreshVariants()">🔄 Refresh</button>
+                <button onclick="generateNewVariant()">➕ Generate Variant</button>
+                <button onclick="createHybridVariant()">🧬 Create Hybrid</button>
+            </div>
+        </div>
+        
+        <div class="current-base">
+            <h2>🧬 Current Evolution Parent</h2>
+            <p class="base-info">
+                <strong>Template:</strong> <span id="current-template">base_resume_v2.html</span><br>
+                <strong>Location:</strong> templates/base_resume_v2.html<br>
+                <strong>Lineage:</strong> Base Gen 1 - Ready for evolution 🧬
+            </p>
+            <div class="variant-actions" style="margin-top: 15px;">
+                <a href="/templates/base_resume_v2.html" target="_blank">👁️ View Current Parent</a>
+                <button onclick="resetToOriginal()">🔄 Reset to Original Base</button>
+            </div>
+        </div>
+        
+        <h2 style="margin-bottom: 15px;">🧬 Resume Evolution Tree</h2>
+        <div class="evolution-container">
+            <div class="base-template-section">
+                <h3>🌱 Base Templates</h3>
+                <div class="base-variants" id="base-templates"></div>
+            </div>
+            
+            <div class="generation-section">
+                <h3>📊 Current Generation</h3>
+                <div class="variant-grid" id="variants-container">
+                    <!-- Variants will be loaded here dynamically -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>📝 How to Use Resume Workshop</h3>
+            <ol>
+                <li><strong>Generate Variants:</strong> Click "Generate Variant" to create new versions tailored for specific jobs</li>
+                <li><strong>Preview:</strong> Click "View HTML" to see the live preview in a new tab</li>
+                <li><strong>Select:</strong> Choose a variant as your new base for further iterations</li>
+                <li><strong>Export:</strong> Generate PDF from your selected variant</li>
+                <li><strong>Iterate:</strong> Continue refining based on job requirements</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script>
+        // Update timestamp
+        function updateTimestamp() {
+            const now = new Date();
+            document.getElementById('timestamp').textContent = now.toLocaleTimeString();
+        }
+        
+        // Check server status
+        async function checkServerStatus() {
+            try {
+                const response = await fetch('/templates/base_resume.html', { method: 'HEAD' });
+                if (response.ok) {
+                    document.getElementById('server-status').innerHTML = '<span style="color: #48bb78;">✓ Running on port 8081</span>';
+                } else {
+                    document.getElementById('server-status').innerHTML = '<span style="color: #f56565;">✗ Not responding</span>';
+                }
+            } catch (error) {
+                document.getElementById('server-status').innerHTML = '<span style="color: #f56565;">✗ Server offline</span>';
+            }
+        }
+        
+        // Load base templates and variants
+        async function loadVariants() {
+            await loadBaseTemplates();
+            await loadCurrentGeneration();
+        }
+        
+        async function loadBaseTemplates() {
+            const container = document.getElementById('base-templates');
+            
+            // Show base templates
+            container.innerHTML = `
+                <div class="base-card">
+                    <div class="variant-header">
+                        <span class="variant-title">Original Base Template</span>
+                        <span class="variant-badge">Gen 0</span>
+                    </div>
+                    <p class="variant-description">Original ATS-optimized template with basic styling.</p>
+                    <div class="variant-metadata">
+                        <div class="variant-timestamp">Created: Initial</div>
+                    </div>
+                    <div class="variant-actions">
+                        <a href="/templates/base_resume.html" target="_blank">👁️ View HTML</a>
+                        <button class="select-btn" onclick="selectVariant('base_resume.html')">✓ Use as Base</button>
+                    </div>
+                </div>
+                
+                <div class="base-card">
+                    <div class="variant-header">
+                        <span class="variant-title">Enhanced Base Template</span>
+                        <span class="variant-badge">Gen 1</span>
+                    </div>
+                    <p class="variant-description">Improved layout with professional summary and better spacing - evolved from optimal variants.</p>
+                    <div class="variant-metadata">
+                        <div class="variant-timestamp">Created: Dec 2024</div>
+                        <div class="lineage-indicator">🧬 Evolved from: happydoc_optimal_1217</div>
+                    </div>
+                    <div class="variant-actions">
+                        <a href="/templates/base_resume_v2.html" target="_blank">👁️ View HTML</a>
+                        <button class="select-btn" onclick="selectVariant('base_resume_v2.html')">✓ Use as Base</button>
+                    </div>
+                </div>
+            `;
+        }
+        
+        async function loadCurrentGeneration() {
+            const container = document.getElementById('variants-container');
+            
+            try {
+                const response = await fetch('/api/variants');
+                if (!response.ok) {
+                    await loadStaticVariants(container);
+                    return;
+                }
+                
+                const variants = await response.json();
+                renderVariantCards(container, variants);
+                
+            } catch (error) {
+                console.log('Variants API not available, showing static variants');
+                await loadStaticVariants(container);
+            }
+        }
+        
+        async function loadStaticVariants(container) {
+            // Get actual variant info from files
+            const staticVariants = [
+                {
+                    filename: 'happydoc_optimal_1217.html',
+                    name: 'HappyDoc Optimal (Gen 2)',
+                    type: 'Multi-Parent Hybrid',
+                    description: 'HYBRID - Combined appeal + skills matching features from Generation 1 parents',
+                    created: 'Dec 17, 2024',
+                    parents: ['appeal_optimized.html', 'skills_matched.html'],
+                    generation: 2,
+                    isRecent: true,
+                    is_hybrid: true,
+                    hybrid_features: 'Professional summary (from appeal) + Bold tech matching (from skills)'
+                },
+                {
+                    filename: 'skills_matched.html',
+                    name: 'Skills Matcher (Gen 1)',
+                    type: 'Tech Focused',
+                    description: 'Emphasizes exact technology matches with job requirements using bold formatting.',
+                    created: 'Dec 17, 2024',
+                    parent: 'base_resume.html',
+                    generation: 1,
+                    isRecent: false
+                },
+                {
+                    filename: 'appeal_optimized.html',
+                    name: 'Appeal Enhanced (Gen 1)',
+                    type: 'Visual Appeal',
+                    description: 'Enhanced visual presentation and professional language for maximum impact.',
+                    created: 'Dec 17, 2024',
+                    parent: 'base_resume.html',
+                    generation: 1,
+                    isRecent: false
+                },
+                {
+                    filename: 'tech_focused.html',
+                    name: 'Tech Focus (Gen 1)',
+                    type: 'Technical',
+                    description: 'Emphasizes technical architecture and development leadership experience.',
+                    created: 'Dec 17, 2024',
+                    parent: 'base_resume.html',
+                    generation: 1,
+                    isRecent: false
+                }
+            ];
+            
+            renderVariantCards(container, staticVariants);
+        }
+        
+        function renderVariantCards(container, variants) {
+            // Sort by generation (highest first), then by recency
+            variants.sort((a, b) => {
+                if (a.generation !== b.generation) {
+                    return b.generation - a.generation; // Higher generation first
+                }
+                if (a.isRecent !== b.isRecent) {
+                    return b.isRecent - a.isRecent; // Recent first
+                }
+                return new Date(b.created) - new Date(a.created); // Newest first
+            });
+            
+            container.innerHTML = variants.map(variant => {
+                const recentClass = variant.isRecent ? 'recent' : '';
+                const hybridIndicator = variant.is_hybrid ? '<span class="hybrid-indicator">🧬 HYBRID</span>' : '';
+                
+                // Handle multi-parent vs single parent display
+                let parentInfo = '';
+                if (variant.is_hybrid && variant.parents && variant.parents.length > 0) {
+                    const parentBadges = variant.parents.map(parent => 
+                        `<span class="parent-badge">${parent}</span>`
+                    ).join('');
+                    parentInfo = `
+                        <div class="multi-parent-info">
+                            <div><strong>🔀 Multiple Parents:</strong></div>
+                            <div style="margin-top: 4px;">${parentBadges}</div>
+                            ${variant.hybrid_features ? `<div class="hybrid-features">✨ ${variant.hybrid_features}</div>` : ''}
+                        </div>
+                    `;
+                } else if (variant.parent) {
+                    parentInfo = `<div class="parent-info">🧬 Evolved from: ${variant.parent}</div>`;
+                }
+                
+                return `
+                    <div class="variant-card ${recentClass}">
+                        <div class="variant-header">
+                            <span class="variant-title">${variant.name}${hybridIndicator}</span>
+                            <span class="variant-badge">${variant.type}</span>
+                        </div>
+                        <p class="variant-description">${variant.description}</p>
+                        <div class="variant-metadata">
+                            <div class="variant-timestamp">Created: ${variant.created}</div>
+                            <div class="lineage-indicator">Generation: ${variant.generation || 1}</div>
+                        </div>
+                        ${parentInfo}
+                        <div class="variant-actions">
+                            <a href="/variants/${variant.filename}" target="_blank">👁️ View HTML</a>
+                            <button class="select-btn" onclick="selectVariant('${variant.filename}')">✓ Evolve from This</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // Select variant as new base for evolution
+        function selectVariant(filename) {
+            const action = filename.includes('base_resume') ? 'Use as base template' : 'Evolve from this variant';
+            if (confirm(`${action}: ${filename}\n\nThis will become the parent for your next generation of variants.`)) {
+                document.getElementById('current-template').textContent = filename;
+                alert(`${action} selected! 🧬\n\nNext variants you create will inherit from: ${filename}\nGeneration will be incremented automatically.`);
+                // Update current lineage info
+                updateCurrentLineage(filename);
+            }
+        }
+        
+        function updateCurrentLineage(filename) {
+            // Extract generation info and update display
+            const generationText = filename.includes('base_resume_v2') ? 'Base Gen 1' : 
+                                 filename.includes('base_resume') ? 'Base Gen 0' :
+                                 filename.includes('optimal') ? 'Generation 2' : 'Generation 1';
+                                 
+            document.querySelector('.base-info').innerHTML = `
+                <strong>Template:</strong> ${filename}<br>
+                <strong>Location:</strong> ${filename.includes('base_resume') ? 'templates/' : 'variants/'}${filename}<br>
+                <strong>Lineage:</strong> ${generationText} - Ready for evolution 🧬
+            `;
+        }
+        
+        // Refresh variants
+        function refreshVariants() {
+            loadVariants();
+            updateTimestamp();
+            checkServerStatus();
+        }
+        
+        // Generate new variant placeholder
+        function generateNewVariant() {
+            alert('To generate a new variant:\n\n1. Provide the job description to the agent\n2. Specify any emphasis areas (location, skills, experience)\n3. The agent will create a tailored variant while preserving factual accuracy');
+        }
+        
+        // Create hybrid variant
+        function createHybridVariant() {
+            const message = `To create a hybrid variant that combines features from multiple parents:
+
+🧬 HYBRID CREATION PROCESS:
+
+1. Use the command line: 
+   python scripts/variant_manager.py create-hybrid [parent1] [parent2] [target_name]
+
+2. Example:
+   python scripts/variant_manager.py create-hybrid appeal_optimized.html skills_matched.html combined_optimal
+
+3. The hybrid will automatically:
+   ✨ Combine features from both parents
+   🏷️ Track multiple parent relationships
+   📊 Be assigned the next generation number
+   🔗 Appear in the web interface with hybrid indicators
+
+4. View the result here in the Resume Workshop after creation!
+
+💡 Pro tip: Hybrids work best when combining complementary features (e.g., visual appeal + technical emphasis)`;
+
+            alert(message);
+        }
+        
+        // Reset to original
+        function resetToOriginal() {
+            if (confirm('Reset to the original base_resume.html template?')) {
+                document.getElementById('current-template').textContent = 'base_resume.html';
+                alert('Reset to original template complete!');
+            }
+        }
+        
+        // Initialize
+        updateTimestamp();
+        checkServerStatus();
+        loadVariants();
+        
+        // Auto-refresh every 30 seconds
+        setInterval(() => {
+            updateTimestamp();
+            checkServerStatus();
+        }, 30000);
+    </script>
+</body>
+</html>
